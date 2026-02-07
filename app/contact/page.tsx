@@ -1,10 +1,10 @@
 import { PageHero } from "@/components/marketing/page-hero";
 import { SectionWrapper } from "@/components/marketing/section-wrapper";
-import { LeadForm } from "@/components/forms/lead-form";
+import { ContactForm } from "@/components/forms/contact-form";
 
 export const metadata = {
   title: "Contact Us - Fusionstek",
-  description: "Get in touch with the Fusionstek team. Submit your inquiry and we'll get back to you soon.",
+  description: "Get in touch with the Fusionstek team about assurance, scope, or compliance needs.",
 };
 
 export default function ContactPage() {
@@ -12,13 +12,13 @@ export default function ContactPage() {
     <>
       <PageHero
         title="Contact Us"
-        subtitle="Have questions? We're here to help. Fill out the form below and we'll get back to you."
+        subtitle="Questions about scope, compliance, or assurance? We’re here to help."
       />
 
       {/* Form Section */}
       <SectionWrapper>
         <div className="max-w-2xl mx-auto">
-          <LeadForm />
+          <ContactForm />
         </div>
       </SectionWrapper>
     </>

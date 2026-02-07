@@ -14,42 +14,42 @@ interface CapabilitySection {
 const capabilities: CapabilitySection[] = [
   {
     icon: Globe,
-    title: "Domain Security",
+    title: "External Discovery",
     items: [
-      "Multi-domain analysis (up to 25 domains)",
-      "Vulnerability detection",
-      "Security gap identification",
-      "Compliance validation",
+      "Scope-enforced domain inventory",
+      "Verified reachability (DNS/HTTP/TLS)",
+      "Asset exhaustion evidence",
+      "API and SaaS surface mapping",
     ],
   },
   {
     icon: FileSearch,
-    title: "File Security",
+    title: "Verification & Findings",
     items: [
-      "Malware detection (any file type)",
-      "Real-time scanning",
-      "Automatic threat removal",
-      "Secure file handling",
+      "Verification-first findings",
+      "Reproducible evidence artifacts",
+      "WAF/CDN posture checks",
+      "Attack-path context",
     ],
   },
   {
     icon: Mail,
-    title: "Reporting & Analytics",
+    title: "Assurance Over Time",
     items: [
-      "Detailed security reports",
-      "Actionable recommendations",
-      "Compliance documentation",
-      "Email delivery",
+      "Daily refresh cadence",
+      "Drift detection and regression tracking",
+      "Baseline and delta evidence",
+      "Assurance scoring",
     ],
   },
   {
     icon: Key,
-    title: "Security & Privacy",
+    title: "Compliance & Governance",
     items: [
-      "Token-based authentication",
-      "IP and UA binding",
-      "90-day auto-deletion",
-      "No PII in analytics",
+      "Policy-driven guardrails",
+      "Due-care timeline",
+      "Audit-ready reporting",
+      "Scope allowlist enforcement",
     ],
   },
 ];
@@ -84,7 +84,7 @@ export function CapabilitiesGrid() {
               <ul className="space-y-2">
                 {section.items.map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-[var(--neutral-400)]">
-                    <span className="text-[var(--primary)] mt-1">•</span>
+                    <span className="text-[var(--primary)] mt-1">-</span>
                     {item}
                   </li>
                 ))}

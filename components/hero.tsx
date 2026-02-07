@@ -16,7 +16,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative flex flex-col h-svh justify-end pb-20 md:pb-24"
+      className="relative flex flex-col min-h-svh justify-end pb-20 md:pb-24"
       suppressHydrationWarning
     >
       <GL hovering={hovering} />
@@ -25,40 +25,47 @@ export function Hero() {
       <div className="relative z-10 container">
         <div className="max-w-3xl mx-auto text-center">
           {/* Pill badge */}
-          <div 
+          <div
             className={cn(
               "opacity-0 translate-y-4",
               mounted && "animate-[reveal-up_0.8s_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards]"
             )}
           >
-            <Pill className="mb-8">CYBERSECURITY SOLUTIONS</Pill>
+            <Pill className="mb-8">EXTERNAL ASSURANCE</Pill>
           </div>
 
           {/* Headline */}
-          <h1 
+          <h1
             className={cn(
               "font-sentient text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extralight tracking-tight leading-[0.95]",
               "opacity-0 translate-y-4",
               mounted && "animate-[reveal-up_0.8s_cubic-bezier(0.16,1,0.3,1)_0.35s_forwards]"
             )}
           >
-            <span className="block">Advanced</span>
+            <span className="block">External</span>
             <span className="block">
               <em className="font-light italic text-[var(--neutral-400)]">Security</em>{" "}
-              Protection
+              Assurance
             </span>
           </h1>
 
           {/* Subheadline */}
-          <p 
+          <p
             className={cn(
-              "mt-8 md:mt-10 text-sm md:text-base text-[var(--neutral-400)] max-w-md mx-auto leading-relaxed",
+              "mt-8 md:mt-10 text-base md:text-lg text-[var(--neutral-200)] max-w-2xl mx-auto leading-relaxed",
               "opacity-0 translate-y-4",
               mounted && "animate-[reveal-up_0.8s_cubic-bezier(0.16,1,0.3,1)_0.5s_forwards]"
             )}
           >
-            Protect your digital infrastructure with cutting-edge malware detection 
-            and domain security assessment
+            <span className="text-[var(--neutral-100)] font-medium">
+              Prove your external security posture
+            </span>
+            <span className="mx-2 inline-flex items-center rounded-full bg-[var(--primary-muted)] px-3 py-1 text-[0.8em] uppercase tracking-widest text-[var(--primary)]">
+              audit-ready
+            </span>
+            <span className="text-[var(--neutral-300)]">
+              continuously and defensibly.
+            </span>
           </p>
 
           {/* CTAs */}

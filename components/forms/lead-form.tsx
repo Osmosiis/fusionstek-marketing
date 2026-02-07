@@ -4,14 +4,13 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
 import { Card } from "../ui/card";
 import { Alert, AlertDescription } from "../ui/alert";
-import { Loader2, Upload, X, CheckCircle2, AlertCircle, AlertTriangle } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Domain validation regex (FQDN-style, no URLs)
@@ -24,21 +23,26 @@ const domainSchema = z
     (val) => {
       const domains = parseDomains(val);
       if (domains.length === 0) return false;
-      if (domains.length > 25) return false;
+      if (domains.length > 5) return false;
       return domains.every((d) => {
         if (d.length > 253) return false;
         return DOMAIN_REGEX.test(d);
       });
     },
     {
-      message: "Invalid domain format or exceeds limits (max 25 domains, 253 chars each)",
+      message: "Invalid domain format or exceeds limits (max 5 domains, 253 chars each)",
     }
   );
 
 const leadFormSchema = z.object({
   name: z.string().min(2, "Name is required"),
-  email: z.string().email("Valid email is required"),
+  email: z.string().email("Valid company email is required"),
+  title: z.string().min(2, "Title is required"),
   company: z.string().min(2, "Company is required"),
+  goals: z.array(z.string()).optional(),
+  constraints: z.array(z.string()).optional(),
+  timeline: z.enum(["24h_report", "48h_report", "72h_report", "no_preference"]).default("24h_report"),
+  scope_notes: z.string().optional(),
   domains: domainSchema,
   notes: z.string().optional(),
   consent: z.boolean().refine((val) => val === true, {
@@ -49,16 +53,33 @@ const leadFormSchema = z.object({
 
 type LeadFormData = z.infer<typeof leadFormSchema>;
 
-interface FileWithPreview extends File {
-  id: string;
-}
-
 interface SubmissionState {
-  status: "idle" | "uploading" | "submitting" | "scanning" | "success" | "error" | "rate_limited";
+  status: "idle" | "submitting" | "success" | "error" | "rate_limited";
   demoRequestId?: string;
-  droppedFiles?: string[];
   errorMessage?: string;
 }
+
+const DEMO_GOALS = [
+  { value: "external_assurance_baseline", label: "External assurance baseline" },
+  { value: "verify_findings_evidence", label: "Verified findings and evidence" },
+  { value: "waf_cdn_posture", label: "WAF/CDN posture validation" },
+  { value: "api_exposure", label: "API exposure verification" },
+  { value: "drift_snapshot", label: "Snapshot for drift tracking" },
+];
+
+const DEMO_CONSTRAINTS = [
+  { value: "no_bruteforce", label: "No brute force" },
+  { value: "no_auth_testing", label: "No auth testing" },
+  { value: "no_exploit_chaining", label: "No exploit chaining" },
+  { value: "low_rate_only", label: "Low rate only" },
+];
+
+const TIMELINE_LABELS: Record<string, string> = {
+  "24h_report": "24-hour baseline report",
+  "48h_report": "48-hour baseline report",
+  "72h_report": "72-hour baseline report",
+  "no_preference": "No preference",
+};
 
 function parseDomains(input: string): string[] {
   return input
@@ -69,7 +90,6 @@ function parseDomains(input: string): string[] {
 }
 
 export function LeadForm() {
-  const [files, setFiles] = useState<FileWithPreview[]>([]);
   const [token, setToken] = useState<string | null>(null);
   const [submissionState, setSubmissionState] = useState<SubmissionState>({ status: "idle" });
   const [scanStartTime, setScanStartTime] = useState<number | null>(null);
@@ -80,7 +100,12 @@ export function LeadForm() {
     defaultValues: {
       name: "",
       email: "",
+      title: "",
       company: "",
+      goals: [],
+      constraints: [],
+      timeline: "24h_report",
+      scope_notes: "",
       domains: "",
       notes: "",
       consent: false,
@@ -114,64 +139,6 @@ export function LeadForm() {
     }
   }
 
-  function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
-    const selectedFiles = Array.from(e.target.files || []);
-    const validFiles: FileWithPreview[] = [];
-
-    selectedFiles.forEach((file) => {
-      if (file.size > 10 * 1024 * 1024) {
-        form.setError("domains", {
-          type: "manual",
-          message: `File ${file.name} exceeds 10MB limit`,
-        });
-        return;
-      }
-      validFiles.push({
-        ...file,
-        id: `${Date.now()}-${Math.random()}`,
-      });
-    });
-
-    const newFiles = [...files, ...validFiles].slice(0, 3);
-    setFiles(newFiles);
-  }
-
-  function removeFile(id: string) {
-    setFiles(files.filter((f) => f.id !== id));
-  }
-
-  async function uploadFiles(uploadToken: string): Promise<{ uploadIds: string[]; droppedFiles: string[] }> {
-    if (files.length === 0) {
-      return { uploadIds: [], droppedFiles: [] };
-    }
-
-    const formData = new FormData();
-    files.forEach((file) => {
-      formData.append("files", file);
-    });
-    formData.append("token", uploadToken);
-
-    const intakeGatewayUrl = process.env.NEXT_PUBLIC_INTAKE_GATEWAY_URL;
-    if (!intakeGatewayUrl) {
-      throw new Error("Intake Gateway URL not configured");
-    }
-
-    const res = await fetch(`${intakeGatewayUrl}/upload`, {
-      method: "POST",
-      body: formData,
-    });
-
-    if (!res.ok) {
-      const error = await res.json().catch(() => ({ message: "Upload failed" }));
-      throw new Error(error.message || "Upload failed");
-    }
-
-    const data = await res.json();
-    return {
-      uploadIds: data.uploadIds || [],
-      droppedFiles: data.droppedFiles || [],
-    };
-  }
 
   async function pollStatus(demoRequestId: string, pollToken: string): Promise<string> {
     const res = await fetch(`/api/intake/status?demo_request_id=${demoRequestId}`, {
@@ -197,28 +164,29 @@ export function LeadForm() {
       return;
     }
 
-    setSubmissionState({ status: "uploading" });
+    const domains = parseDomains(data.domains);
+    const emailDomain = data.email.split("@")[1]?.toLowerCase() || "";
+    if (!emailDomain || !domains.some((domain) => emailDomain === domain || emailDomain.endsWith(`.${domain}`))) {
+      form.setError("email", {
+        type: "manual",
+        message: "Email must use the company domain (match one of the submitted domains).",
+      });
+      return;
+    }
 
     try {
-      // Step 1: Upload files
-      let uploadIds: string[] = [];
-      let droppedFiles: string[] = [];
-
-      if (files.length > 0) {
-        try {
-          const uploadResult = await uploadFiles(token);
-          uploadIds = uploadResult.uploadIds;
-          droppedFiles = uploadResult.droppedFiles;
-        } catch (error) {
-          console.error("File upload error:", error);
-          // Continue without files if upload fails
-        }
-      }
-
-      // Step 2: Submit metadata
+      // Step 1: Submit metadata
       setSubmissionState({ status: "submitting" });
 
-      const domains = parseDomains(data.domains);
+      const goals = data.goals?.length ? `Requested focus: ${data.goals.join(", ")}` : "";
+      const constraints = data.constraints?.length ? `Constraints: ${data.constraints.join(", ")}` : "";
+      const timeline = data.timeline ? `Timeline: ${TIMELINE_LABELS[data.timeline] || data.timeline}` : "";
+      const title = data.title?.trim() ? `Title: ${data.title.trim()}` : "";
+      const scopeNotes = data.scope_notes?.trim() ? `Scope notes: ${data.scope_notes.trim()}` : "";
+      const additionalNotes = data.notes?.trim() ? `Additional notes: ${data.notes.trim()}` : "";
+      const combinedNotes = [title, goals, constraints, timeline, scopeNotes, additionalNotes]
+        .filter(Boolean)
+        .join("\n");
 
       const submitRes = await fetch("/api/intake/submit", {
         method: "POST",
@@ -226,10 +194,10 @@ export function LeadForm() {
         body: JSON.stringify({
           name: data.name,
           email: data.email,
+          title: data.title,
           company: data.company,
           domains,
-          notes: data.notes || "",
-          uploadIds,
+          notes: combinedNotes,
           consent: data.consent,
           honeypot: data.honeypot,
           token,
@@ -263,13 +231,12 @@ export function LeadForm() {
         setSubmissionState({
           status: "success",
           demoRequestId,
-          droppedFiles,
         });
         if (typeof window !== "undefined" && (window as any).analytics) {
           (window as any).analytics.track("demo_request_success");
         }
       } else if (status === "scanning" || status === "pending") {
-        setSubmissionState({ status: "scanning", demoRequestId, droppedFiles });
+        setSubmissionState({ status: "submitting", demoRequestId });
         setScanStartTime(Date.now());
 
         // Poll for up to 2 minutes
@@ -289,7 +256,6 @@ export function LeadForm() {
               setSubmissionState({
                 status: "success",
                 demoRequestId,
-                droppedFiles,
               });
               if (typeof window !== "undefined" && (window as any).analytics) {
                 (window as any).analytics.track("demo_request_success");
@@ -312,7 +278,6 @@ export function LeadForm() {
         setSubmissionState({
           status: "success",
           demoRequestId,
-          droppedFiles,
         });
       }
     } catch (error: any) {
@@ -336,7 +301,7 @@ export function LeadForm() {
           </div>
           <h3 className="font-sentient text-2xl md:text-3xl font-extralight mb-4">Request Submitted Successfully</h3>
           <p className="text-[var(--neutral-400)] mb-8">
-            Your demo request has been received. Results will be emailed to you shortly.
+            Your demo request has been received. Results will be emailed within 24 hours.
           </p>
           {submissionState.demoRequestId && (
             <div className="bg-[var(--background)] border border-[var(--border)] rounded-xl p-5 mb-8">
@@ -344,27 +309,10 @@ export function LeadForm() {
               <p className="font-mono text-lg text-[var(--primary)]">{submissionState.demoRequestId}</p>
             </div>
           )}
-          {submissionState.droppedFiles && submissionState.droppedFiles.length > 0 && (
-            <Alert variant="destructive" className="mb-8 text-left">
-              <AlertTriangle className="h-4 w-4" />
-              <AlertDescription>
-                <p className="font-semibold mb-2">Some files were removed:</p>
-                <ul className="list-disc list-inside space-y-1">
-                  {submissionState.droppedFiles.map((filename, i) => (
-                    <li key={i} className="text-sm">
-                      {filename}
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-sm mt-2">These files did not meet security requirements.</p>
-              </AlertDescription>
-            </Alert>
-          )}
           <button
             onClick={() => {
               setSubmissionState({ status: "idle" });
               form.reset();
-              setFiles([]);
             }}
             className={cn(
               "inline-flex items-center justify-center gap-2 px-6 py-3",
@@ -409,7 +357,7 @@ export function LeadForm() {
 
         {/* Email */}
         <div>
-          <Label htmlFor="email">Email *</Label>
+          <Label htmlFor="email">Company Email *</Label>
           <Input
             id="email"
             type="email"
@@ -418,6 +366,19 @@ export function LeadForm() {
           />
           {form.formState.errors.email && (
             <p className="text-sm text-destructive mt-1">{form.formState.errors.email.message}</p>
+          )}
+        </div>
+
+        {/* Title */}
+        <div>
+          <Label htmlFor="title">Title *</Label>
+          <Input
+            id="title"
+            {...form.register("title")}
+            disabled={submissionState.status !== "idle"}
+          />
+          {form.formState.errors.title && (
+            <p className="text-sm text-destructive mt-1">{form.formState.errors.title.message}</p>
           )}
         </div>
 
@@ -434,10 +395,87 @@ export function LeadForm() {
           )}
         </div>
 
+        {/* Demo Goals */}
+        <div>
+          <Label>What should we test? <span className="text-foreground/40 text-xs">(optional)</span></Label>
+          <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {DEMO_GOALS.map((goal) => (
+              <label key={goal.value} className="flex items-start gap-3 text-sm">
+                <Checkbox
+                  checked={form.watch("goals")?.includes(goal.value)}
+                  onCheckedChange={(checked) => {
+                    const current = form.getValues("goals") || [];
+                    const next = checked
+                      ? [...current, goal.value]
+                      : current.filter((v) => v !== goal.value);
+                    form.setValue("goals", next);
+                  }}
+                  disabled={submissionState.status !== "idle"}
+                />
+                <span className="text-[var(--neutral-300)]">{goal.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Constraints */}
+        <div>
+          <Label>Constraints <span className="text-foreground/40 text-xs">(optional)</span></Label>
+          <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {DEMO_CONSTRAINTS.map((constraint) => (
+              <label key={constraint.value} className="flex items-start gap-3 text-sm">
+                <Checkbox
+                  checked={form.watch("constraints")?.includes(constraint.value)}
+                  onCheckedChange={(checked) => {
+                    const current = form.getValues("constraints") || [];
+                    const next = checked
+                      ? [...current, constraint.value]
+                      : current.filter((v) => v !== constraint.value);
+                    form.setValue("constraints", next);
+                  }}
+                  disabled={submissionState.status !== "idle"}
+                />
+                <span className="text-[var(--neutral-300)]">{constraint.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Timeline */}
+        <div>
+          <Label htmlFor="timeline">Timeline <span className="text-foreground/40 text-xs">(optional)</span></Label>
+          <select
+            id="timeline"
+            {...form.register("timeline")}
+            disabled={submissionState.status !== "idle"}
+            className={cn(
+              "mt-2 w-full rounded-md border border-[var(--border)] bg-transparent px-3 py-2 text-sm",
+              "text-[var(--neutral-300)] focus:border-[var(--border-hover)]"
+            )}
+          >
+            <option value="24h_report">24-hour baseline report</option>
+            <option value="48h_report">48-hour baseline report</option>
+            <option value="72h_report">72-hour baseline report</option>
+            <option value="no_preference">No preference</option>
+          </select>
+        </div>
+
+        {/* Scope Notes */}
+        <div>
+          <Label htmlFor="scope_notes">Scope Notes <span className="text-foreground/40 text-xs">(optional)</span></Label>
+          <Textarea
+            id="scope_notes"
+            {...form.register("scope_notes")}
+            rows={3}
+            placeholder="Any scope details or constraints you want us to honor"
+            disabled={submissionState.status !== "idle"}
+          />
+        </div>
+
         {/* Domains */}
         <div>
           <Label htmlFor="domains">
-            Domains * <span className="text-foreground/40 text-xs">(comma or newline separated, max 25)</span>
+            Domains * <span className="text-foreground/40 text-xs">(comma or newline separated, max 5)</span>
           </Label>
           <Textarea
             id="domains"
@@ -449,49 +487,6 @@ export function LeadForm() {
           {form.formState.errors.domains && (
             <p className="text-sm text-destructive mt-1">{form.formState.errors.domains.message}</p>
           )}
-        </div>
-
-        {/* Files */}
-        <div>
-          <Label>
-            Files <span className="text-foreground/40 text-xs">(optional, max 3 files, 10MB each)</span>
-          </Label>
-          <div className="mt-2">
-            <Input
-              type="file"
-              multiple
-              onChange={handleFileSelect}
-              disabled={submissionState.status !== "idle" || files.length >= 3}
-              className="cursor-pointer"
-            />
-            {files.length > 0 && (
-              <div className="mt-4 space-y-2">
-                {files.map((file) => (
-                  <div
-                    key={file.id}
-                    className="flex items-center justify-between p-3 bg-background border border-border rounded-lg"
-                  >
-                    <div className="flex items-center gap-2 flex-1 min-w-0">
-                      <Upload className="w-4 h-4 text-foreground/40 flex-shrink-0" />
-                      <span className="text-sm truncate">{file.name}</span>
-                      <span className="text-xs text-foreground/40">
-                        ({(file.size / 1024 / 1024).toFixed(2)} MB)
-                      </span>
-                    </div>
-                    <Button
-                      type="button"
-                      size="sm"
-                      onClick={() => removeFile(file.id)}
-                      disabled={submissionState.status !== "idle"}
-                      className="ml-2 bg-transparent border-foreground/20 text-foreground hover:bg-foreground/10"
-                    >
-                      <X className="w-4 h-4" />
-                    </Button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
         </div>
 
         {/* Notes */}
@@ -560,31 +555,13 @@ export function LeadForm() {
           )}
         >
           {submissionState.status === "idle" && "Submit Request"}
-          {(submissionState.status === "uploading" ||
-            submissionState.status === "submitting") && (
+          {submissionState.status === "submitting" && (
             <>
               <Loader2 className="w-4 h-4 animate-spin" />
               Processing...
             </>
           )}
-          {submissionState.status === "scanning" && (
-            <>
-              <Loader2 className="w-4 h-4 animate-spin" />
-              Scanning files...
-            </>
-          )}
         </button>
-
-        {submissionState.status === "scanning" && submissionState.demoRequestId && (
-          <div className="text-center">
-            <p className="text-sm text-[var(--neutral-400)]">
-              Your files are being scanned. This may take a few moments.
-            </p>
-            <p className="text-xs text-[var(--neutral-500)] mt-2">
-              Reference ID: {submissionState.demoRequestId}
-            </p>
-          </div>
-        )}
       </form>
     </div>
   );

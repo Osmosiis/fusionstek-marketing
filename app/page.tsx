@@ -24,26 +24,26 @@ export default function Home() {
       {/* Problem Section */}
       <SectionWrapper
         id="problem"
-        title="The Cybersecurity Challenge"
-        subtitle="Modern threats require advanced protection"
+        title="Regulatory-Defensible External Security"
+        subtitle="Continuous proof that your internet-facing apps are monitored, verified, and audit-ready."
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <FeatureCard
             iconName="AlertTriangle"
-            title="Sophisticated Threats"
-            description="Cybercriminals are constantly evolving their tactics, making traditional security measures insufficient."
+            title="External Exposure Blind Spots"
+            description="Unmonitored internet-facing assets create silent risk and unaccounted attack paths."
             index={0}
           />
           <FeatureCard
             iconName="Shield"
-            title="Domain Vulnerabilities"
-            description="Unidentified security gaps in your domain infrastructure can lead to data breaches and service disruptions."
+            title="Verification Gaps"
+            description="Findings without external proof don’t hold up to regulators, insurers, or post-incident reviews."
             index={1}
           />
           <FeatureCard
             iconName="Lock"
-            title="Compliance Requirements"
-            description="Meeting regulatory standards requires comprehensive security assessments and continuous monitoring."
+            title="Assurance Over Time"
+            description="Compliance requires continuous evidence of monitoring, remediation, and drift control—not one-off scans."
             index={2}
           />
         </div>
@@ -52,32 +52,32 @@ export default function Home() {
       {/* Value/Difference */}
       <SectionWrapper
         id="value"
-        title="Why Choose Fusionstek"
-        subtitle="Comprehensive security solutions designed for modern threats"
+        title="Why Fusionstek for External Assurance"
+        subtitle="Continuous, evidence-grade visibility that stands up to regulators and insurers."
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <FeatureCard
             iconName="Zap"
-            title="Real-Time Detection"
-            description="Advanced algorithms detect threats as they emerge, providing immediate protection."
+            title="Attacker-Grade Discovery"
+            description="Map every internet-facing asset with real evidence, not assumptions."
             index={0}
           />
           <FeatureCard
             iconName="FileSearch"
-            title="Comprehensive Scanning"
-            description="Multi-layered analysis of domains and files to identify potential security risks."
+            title="Verification-First Findings"
+            description="Only show findings that can be verified and reproduced."
             index={1}
           />
           <FeatureCard
             iconName="Shield"
-            title="Automated Reporting"
-            description="Detailed security reports delivered automatically, saving time and ensuring compliance."
+            title="Audit-Ready Reporting"
+            description="Explainable, deterministic reports built for regulators and insurers."
             index={2}
           />
           <FeatureCard
             iconName="Users"
-            title="Expert Support"
-            description="Dedicated security team available to help you understand and address findings."
+            title="Continuous Assurance"
+            description="Daily refresh + drift detection to prove you stayed secure over time."
             index={3}
           />
         </div>
@@ -87,29 +87,29 @@ export default function Home() {
       <SectionWrapper
         id="how-it-works"
         title="How It Works"
-        subtitle="Simple, secure, and efficient"
+        subtitle="Deterministic discovery, verification, and evidence—no guesswork."
       >
         <StepStrip
           steps={[
             {
               number: 1,
-              title: "Submit Your Request",
-              description: "Provide your domains and optional files for assessment.",
+              title: "Submit Scope",
+              description: "Provide domains and approved scope under your policy.",
             },
             {
               number: 2,
-              title: "Automated Scanning",
-              description: "Our system performs comprehensive security analysis.",
+              title: "Discover & Map",
+              description: "We enumerate internet-facing assets and build a verified surface map.",
             },
             {
               number: 3,
-              title: "Threat Detection",
-              description: "Advanced algorithms identify vulnerabilities and malware.",
+              title: "Verify & Analyze",
+              description: "Findings are validated with evidence, not assumptions.",
             },
             {
               number: 4,
-              title: "Receive Results",
-              description: "Get detailed reports via email with actionable recommendations.",
+              title: "Deliver Evidence",
+              description: "Receive audit-ready reports and continuous assurance tracking.",
             },
           ]}
         />
@@ -124,36 +124,36 @@ export default function Home() {
       <SectionWrapper
         id="use-cases"
         title="Use Cases"
-        subtitle="Protecting businesses across industries"
+        subtitle="External assurance for regulated, internet-facing organizations"
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <UseCaseTile
-            title="Enterprise Security"
-            description="Comprehensive domain security assessment for large organizations."
+            title="Enterprise External Assurance"
+            description="Defensible visibility across complex domain portfolios."
             bullets={[
-              "Multi-domain analysis",
-              "Compliance reporting",
-              "Continuous monitoring",
+              "Multi-domain scope control",
+              "Audit-ready evidence",
+              "Drift tracking over time",
             ]}
             index={0}
           />
           <UseCaseTile
-            title="E-commerce Protection"
-            description="Secure your online storefront and customer data."
+            title="E-commerce & Public SaaS"
+            description="Continuous proof that customer-facing surfaces stay secure."
             bullets={[
-              "Payment security validation",
-              "Domain reputation checks",
-              "Malware detection",
+              "Verified reachability + findings",
+              "Policy‑approved edge posture checks",
+              "Daily refresh cadence",
             ]}
             index={1}
           />
           <UseCaseTile
-            title="SaaS Platform Security"
-            description="Ensure your cloud services remain secure and trusted."
+            title="Regulated & High-Risk Industries"
+            description="Assurance built to satisfy regulators and insurers."
             bullets={[
-              "API endpoint validation",
-              "File upload security",
-              "Threat intelligence",
+              "Due-care timeline",
+              "Verification ledger",
+              "Policy-enforced guardrails",
             ]}
             index={2}
           />
@@ -169,29 +169,29 @@ export default function Home() {
       <SectionWrapper
         id="trust"
         title="Trusted by Security Teams"
-        subtitle="See what our clients say"
+        subtitle="Assurance outcomes that security leaders expect"
       >
         <MetricsStrip
           metrics={[
             {
-              value: "10K+",
-              label: "Domains Scanned",
-              description: "Monthly assessments",
+              value: "Daily",
+              label: "Refresh Cadence",
+              description: "Automated assurance updates",
             },
             {
-              value: "99.9%",
-              label: "Uptime",
-              description: "Service reliability",
+              value: "24h",
+              label: "Baseline SLA",
+              description: "Demo report delivery",
             },
             {
-              value: "500+",
-              label: "Enterprise Clients",
-              description: "Trusted partners",
+              value: "Evidence",
+              label: "Verification",
+              description: "Findings backed by proof",
             },
             {
-              value: "<15s",
-              label: "Average Scan Time",
-              description: "Fast results",
+              value: "Daily",
+              label: "Drift Tracking",
+              description: "Posture changes recorded",
             },
           ]}
           className="mb-20"
@@ -200,22 +200,22 @@ export default function Home() {
         <TestimonialStrip
           testimonials={[
             {
-              quote: "Fusionstek helped us identify critical vulnerabilities before they became incidents.",
-              author: "Sarah Chen",
-              role: "CISO",
-              company: "TechCorp",
+              quote: "We finally have external assurance we can defend—clear evidence, timelines, and verification.",
+              author: "Security Leadership",
+              role: "Enterprise",
+              company: "CISO Office",
             },
             {
-              quote: "The automated scanning saves us hours of manual security assessment work.",
-              author: "Michael Rodriguez",
-              role: "Security Lead",
-              company: "StartupXYZ",
+              quote: "Attacker‑grade discovery plus audit‑ready reporting closed our compliance gaps fast.",
+              author: "Risk & Compliance",
+              role: "Financial Services",
+              company: "Security Team",
             },
             {
-              quote: "Comprehensive reports that our compliance team actually understands.",
-              author: "Emily Johnson",
-              role: "IT Director",
-              company: "FinanceCo",
+              quote: "Daily assurance with verified findings gave us confidence without risky testing.",
+              author: "Security Operations",
+              role: "Public SaaS",
+              company: "Engineering",
             },
           ]}
         />
@@ -238,10 +238,10 @@ export default function Home() {
             )}
           >
             <h2 className="font-sentient text-3xl md:text-4xl lg:text-5xl font-extralight tracking-tight mb-6">
-              Ready to Secure Your Infrastructure?
+              Ready for Attacker-Grade Assurance?
             </h2>
             <p className="text-[var(--neutral-400)] text-base md:text-lg mb-10 leading-relaxed">
-              Book a demo today and see how Fusionstek can protect your digital assets.
+              See how we prove external security with audit-ready evidence.
             </p>
             <CTAButton href="/demo" variant="primary" size="lg">
               Book a Demo

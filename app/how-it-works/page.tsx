@@ -8,7 +8,7 @@ import { Shield, FileText, Zap, CheckCircle2, Lock, Clock } from "lucide-react";
 
 export const metadata = {
   title: "How It Works - Fusionstek",
-  description: "Learn how Fusionstek's automated security scanning process protects your digital infrastructure.",
+  description: "See how Fusionstek builds continuous, audit-ready external security assurance.",
 };
 
 export default function HowItWorksPage() {
@@ -16,35 +16,35 @@ export default function HowItWorksPage() {
     <>
       <PageHero
         title="How It Works"
-        subtitle="Our streamlined process makes security assessment simple and efficient."
+        subtitle="Deterministic discovery, verification, and evidence—built for audit-ready assurance."
       />
 
       {/* 4-Step Process */}
       <SectionWrapper
         title="The Process"
-        subtitle="Four simple steps to comprehensive security assessment"
+        subtitle="Four steps to external security assurance that stands up to scrutiny"
       >
         <StepStrip
           steps={[
             {
               number: 1,
-              title: "Submit Your Request",
-              description: "Provide your domains (up to 25) and optionally upload files (up to 3, 10MB each) for assessment.",
+              title: "Define Scope",
+              description: "Provide your domains and approved scope. Policies enforce what we can test and how.",
             },
             {
               number: 2,
-              title: "Automated Scanning",
-              description: "Our advanced scanning engine performs real-time malware detection and domain security analysis.",
+              title: "Discover & Map",
+              description: "We enumerate internet-facing assets and build a verified surface map.",
             },
             {
               number: 3,
-              title: "Threat Detection",
-              description: "Multiple security layers analyze your submissions for vulnerabilities and potential threats.",
+              title: "Verify & Analyze",
+              description: "Findings are validated with evidence and tied to real, reachable assets.",
             },
             {
               number: 4,
-              title: "Receive Results",
-              description: "Get comprehensive security reports delivered to your email with actionable recommendations.",
+              title: "Deliver Evidence",
+              description: "Audit-ready reports, drift tracking, and defensible timelines are produced automatically.",
             },
           ]}
         />
@@ -53,43 +53,43 @@ export default function HowItWorksPage() {
       {/* What You Get */}
       <SectionWrapper
         title="What You Get"
-        subtitle="Comprehensive security insights delivered automatically"
+        subtitle="External assurance artifacts that regulators, insurers, and boards can trust"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <FeatureCard
             iconName="Shield"
-            title="Domain Security Assessment"
-            description="Comprehensive analysis of your domain infrastructure, identifying vulnerabilities and security gaps."
+            title="Verified Asset Inventory"
+            description="A continuously updated map of internet-facing assets with reachability evidence."
             index={0}
           />
           <FeatureCard
             iconName="FileText"
-            title="Malware Detection"
-            description="Advanced scanning of uploaded files to detect malicious code, viruses, and suspicious patterns."
+            title="Evidence-Grade Findings"
+            description="Only findings that can be verified and reproduced make it into reports."
             index={1}
           />
           <FeatureCard
             iconName="Zap"
-            title="Real-Time Processing"
-            description="Fast, automated scanning with synchronous completion when possible, ensuring quick results."
+            title="Assurance Over Time"
+            description="Daily refresh + drift detection prove that posture stays secure between baselines."
             index={2}
           />
           <FeatureCard
             iconName="CheckCircle2"
-            title="Detailed Reports"
-            description="Comprehensive security reports with findings, risk assessments, and actionable recommendations."
+            title="Audit-Ready Reports"
+            description="Deterministic reporting with provenance, timelines, and compliance-ready evidence."
             index={3}
           />
           <FeatureCard
             iconName="Lock"
-            title="Compliance Support"
-            description="Reports formatted to help meet regulatory requirements and security standards."
+            title="Policy-Driven Guardrails"
+            description="Compliance-safe execution with explicit scope, consent, and prohibited-action controls."
             index={4}
           />
           <FeatureCard
             iconName="Clock"
-            title="Secure File Handling"
-            description="All uploaded files are automatically deleted after 90 days, ensuring data privacy and compliance."
+            title="Disclosure Readiness"
+            description="Clear timelines of what was known, when, and what was verified."
             index={5}
           />
         </div>
@@ -104,28 +104,24 @@ export default function HowItWorksPage() {
           <FAQAccordion
             faqs={[
               {
-                question: "How long does the scanning process take?",
-                answer: "Most scans complete within 15 seconds. If processing takes longer, we'll continue scanning in the background and notify you via email when complete. You'll receive a reference ID to track your request.",
-              },
-              {
-                question: "What happens if a file is flagged as malicious?",
-                answer: "If a file is flagged during scanning, it will be automatically removed from your submission. Your request will still be processed with the remaining files, and you'll receive a notification listing any removed files with generic security reasons.",
+                question: "How long does the baseline assurance take?",
+                answer: "Baseline assurance depends on scope. We deliver demo reports within 24 hours, and daily refresh keeps assurance current afterward.",
               },
               {
                 question: "How many domains can I submit?",
-                answer: "You can submit up to 25 domains per request. Domains should be in FQDN format (e.g., example.com) and separated by commas or newlines.",
+                answer: "Demo requests support up to 5 domains. Larger scopes are handled through a full engagement with expanded policy.",
               },
               {
-                question: "What file types are supported?",
-                answer: "We accept any file type for security analysis. Each file must be under 10MB, and you can upload up to 3 files per request.",
+                question: "Is the process compliance-safe?",
+                answer: "Yes. Execution is governed by policy and consent. High‑risk actions are disabled unless explicitly authorized in a formal engagement.",
               },
               {
-                question: "How long are uploaded files retained?",
-                answer: "Uploaded files are automatically deleted 90 days after submission to ensure data privacy and compliance with security best practices.",
+                question: "What evidence do you provide to regulators or insurers?",
+                answer: "We provide audit-ready reports plus a verification ledger and due-care timeline showing what was tested, when, and how it was confirmed.",
               },
               {
                 question: "Do I need authorization to assess domains?",
-                answer: "Yes, you must have proper authorization to assess the domains you submit. This is required for legal and ethical security assessment practices.",
+                answer: "Yes. Scope is allowlisted and enforced—authorization is required for every domain tested.",
               },
             ]}
           />

@@ -41,9 +41,8 @@ export function Footer() {
           <div className="md:col-span-5">
             <Logo className="w-[100px] mb-6 opacity-60" />
             <p className="text-[var(--neutral-500)] text-sm leading-relaxed max-w-sm">
-              Advanced cybersecurity solutions for modern threats. Protect your
-              digital infrastructure with cutting-edge malware detection and
-              domain security assessment.
+              Attacker-grade external assurance with audit-ready proof. We find
+              what attackers can reach and prove it defensibly over time.
             </p>
           </div>
 

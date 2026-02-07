@@ -1,6 +1,6 @@
 # Fusionstek Marketing Website
 
-Marketing website for Fusionstek, an advanced cybersecurity web application providing domain security assessment and malware detection services.
+Marketing website for Fusionstek, an advanced cybersecurity web application providing domain security assurance services.
 
 ## Overview
 
@@ -18,9 +18,7 @@ This is a Next.js marketing website built to capture qualified "Book a Demo" lea
 
 ### Core Functionality
 
-- **Multi-domain submission**: Accept up to 25 domains per request
-- **File uploads**: Support for up to 3 files (10MB each, any file type)
-- **Malware scanning**: Synchronous scanning with fallback to polling
+- **Multi-domain submission**: Accept up to 5 domains per request
 - **Security**: Signed one-time tokens bound to IP + User-Agent
 - **Lead capture**: Comprehensive form with validation and error handling
 
@@ -72,7 +70,7 @@ Run the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3001](http://localhost:3001) in your browser.
 
 ### Build
 
@@ -110,17 +108,15 @@ The application includes three API routes for Intake Gateway integration:
 ### Data Flow
 
 1. Browser requests token from Next.js API
-2. User uploads files directly to Intake Gateway (with token)
-3. Browser submits metadata to Next.js API (proxied to Intake Gateway)
-4. If scan pending after 15s, browser polls status via Next.js API
-5. Results displayed with `demo_request_id` reference
+2. Browser submits metadata to Next.js API (proxied to Intake Gateway)
+3. If scan pending after 15s, browser polls status via Next.js API
+4. Results displayed with `demo_request_id` reference
 
 ### Demo Confirmation Behavior
 
 - Success state displays `demo_request_id` reference ID
 - Users are informed that results will be emailed
 - No links to platform/dashboard (intake request only)
-- Flagged files are listed with generic security reasons
 - Processing state shown if scan takes longer than 15 seconds
 
 ## Security Features
@@ -135,13 +131,6 @@ The application includes three API routes for Intake Gateway integration:
 
 - Hidden form field to catch bots
 - Server-side validation rejects submissions with honeypot filled
-
-### File Handling
-
-- Maximum 3 files per submission
-- 10MB size limit per file
-- Automatic deletion after 90 days (Intake Gateway responsibility)
-- Malware scanning with automatic removal of flagged files
 
 ### Rate Limiting
 

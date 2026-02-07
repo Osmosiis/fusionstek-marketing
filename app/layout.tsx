@@ -10,8 +10,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fusionstek - Advanced Cybersecurity Solutions",
-  description: "Protect your digital infrastructure with cutting-edge malware detection and domain security assessment.",
+  title: "Fusionstek - External Security Assurance",
+  description: "Prove your external security posture continuously, defensibly, and audit-ready.",
   generator: "Next.js",
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <Navbar />
-        <main className="min-h-screen" suppressHydrationWarning>
+        <main className="min-h-screen pt-24 md:pt-28" suppressHydrationWarning>
           {children}
         </main>
         <Footer />

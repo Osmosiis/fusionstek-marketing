@@ -5,7 +5,7 @@ import { CTAButton } from "@/components/marketing/cta-button";
 
 export const metadata = {
   title: "Use Cases - Fusionstek",
-  description: "Discover how Fusionstek protects businesses across industries with advanced cybersecurity solutions.",
+  description: "External security assurance across industries with audit-ready evidence.",
 };
 
 export default function UseCasesPage() {
@@ -13,42 +13,42 @@ export default function UseCasesPage() {
     <>
       <PageHero
         title="Use Cases"
-        subtitle="Comprehensive security solutions for businesses of all sizes and industries."
+        subtitle="External assurance for regulated, internet-facing organizations."
       />
 
       {/* Primary Use Cases */}
       <SectionWrapper
         title="Industries We Serve"
-        subtitle="Tailored security solutions for your specific needs"
+        subtitle="Assurance-grade visibility designed for your risk profile"
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <UseCaseTile
-            title="Enterprise Security"
-            description="Large organizations need comprehensive domain security assessment to protect their digital infrastructure."
+            title="Enterprise External Assurance"
+            description="Defensible visibility across complex domain portfolios."
             bullets={[
-              "Multi-domain analysis for complex infrastructures",
-              "Compliance reporting for regulatory requirements",
-              "Continuous monitoring and threat detection",
+              "Multi-domain scope control",
+              "Audit-ready evidence",
+              "Drift tracking over time",
             ]}
             index={0}
           />
           <UseCaseTile
-            title="E-commerce Protection"
-            description="Online retailers require robust security to protect customer data and payment information."
+            title="E-commerce & Public SaaS"
+            description="Continuous proof that customer-facing surfaces stay secure."
             bullets={[
-              "Payment security validation and PCI compliance",
-              "Domain reputation monitoring and management",
-              "Malware detection in uploaded content",
+              "Verified reachability + findings",
+              "Policy‑approved edge posture checks",
+              "Daily refresh cadence",
             ]}
             index={1}
           />
           <UseCaseTile
-            title="SaaS Platform Security"
-            description="Cloud service providers need to ensure their platforms remain secure and compliant."
+            title="Regulated & High-Risk Industries"
+            description="Assurance built to satisfy regulators and insurers."
             bullets={[
-              "API endpoint security validation",
-              "File upload security for user-generated content",
-              "Multi-tenant security assessment",
+              "Due-care timeline",
+              "Verification ledger",
+              "Policy-enforced guardrails",
             ]}
             index={2}
           />
@@ -63,31 +63,31 @@ export default function UseCasesPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <UseCaseTile
             title="Healthcare Data Protection"
-            description="Healthcare organizations must protect patient data and comply with HIPAA regulations."
+            description="External assurance for patient-facing portals and public services."
             bullets={[
-              "HIPAA compliance validation",
-              "Patient data security assessment",
-              "Medical device security analysis",
+              "Audit-ready evidence for regulators",
+              "Verified exposure of public apps",
+              "Continuous drift visibility",
             ]}
             index={0}
           />
           <UseCaseTile
             title="Financial Services Security"
-            description="Banks and financial institutions require the highest levels of security."
+            description="Defensible external posture for high-trust environments."
             bullets={[
-              "Regulatory compliance validation",
-              "Transaction security verification",
-              "Fraud detection and prevention",
+              "Verified exposure for public apps/APIs",
+              "Compliance-safe monitoring cadence",
+              "Due-care timelines for audits",
             ]}
             index={1}
           />
           <UseCaseTile
             title="Government & Public Sector"
-            description="Public sector organizations need robust security for critical infrastructure."
+            description="External assurance for critical public services."
             bullets={[
-              "Critical infrastructure protection",
-              "Citizen data privacy validation",
-              "National security compliance",
+              "Evidence-grade reporting for oversight",
+              "Policy-enforced guardrails",
+              "Drift tracking for public services",
             ]}
             index={2}
           />
@@ -98,10 +98,10 @@ export default function UseCasesPage() {
       <SectionWrapper>
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="font-sentient text-3xl md:text-4xl font-extralight tracking-tight mb-6">
-            Find the Right Solution for Your Business
+            Attacker-Grade Assurance, Audit-Ready Proof
           </h2>
           <p className="text-[var(--neutral-400)] text-lg mb-10">
-            Contact us to discuss your specific security needs and requirements.
+            We find what attackers can reach and prove it in reports regulators trust.
           </p>
           <CTAButton href="/demo" variant="primary" size="lg">
             Book a Demo

@@ -4,7 +4,7 @@ import { LeadForm } from "@/components/forms/lead-form";
 
 export const metadata = {
   title: "Book a Demo - Fusionstek",
-  description: "Request a security assessment for your domains and files. Submit your intake request to get started.",
+  description: "Request a scoped external assurance demo for up to five domains. Submit your intake request to get started.",
 };
 
 export default function DemoPage() {
@@ -12,14 +12,14 @@ export default function DemoPage() {
     <>
       <PageHero
         title="Book a Demo"
-        subtitle="Request a security assessment for your domains and files."
+        subtitle="Request a policy‑safe assurance demo with audit‑ready evidence."
       />
 
       {/* Form Section */}
       <SectionWrapper>
         <div className="max-w-2xl mx-auto">
           <p className="text-center text-[var(--neutral-500)] text-sm mb-8">
-            This is an intake request form. Results will be emailed to you after processing.
+            This is a scoped baseline request. We deliver a report within 24 hours by default.
           </p>
           <LeadForm />
         </div>
