@@ -1,10 +1,10 @@
 import { PageHero } from "@/components/marketing/page-hero";
 import { SectionWrapper } from "@/components/marketing/section-wrapper";
-import { LeadForm } from "@/components/forms/lead-form";
+import { DemoRequestForm } from "@/components/forms/demo-request-form";
 
 export const metadata = {
   title: "Book a Demo - Fusionstek",
-  description: "Request a scoped external assurance demo for up to five domains. Submit your intake request to get started.",
+  description: "Schedule a demo of Fusionstek EASM and regulator assurance. We'll reach out to find a time that works.",
 };
 
 export default function DemoPage() {
@@ -12,16 +12,15 @@ export default function DemoPage() {
     <>
       <PageHero
         title="Book a Demo"
-        subtitle="Request a policy‑safe assurance demo with audit‑ready evidence."
+        subtitle="See how EASM and regulator assurance work in practice. We'll reach out to schedule a call."
       />
 
-      {/* Form Section */}
       <SectionWrapper>
         <div className="max-w-2xl mx-auto">
           <p className="text-center text-[var(--neutral-500)] text-sm mb-8">
-            This is a scoped baseline request. We deliver a report within 24 hours by default.
+            Share your details and we'll get in touch to set up a time that works for you.
           </p>
-          <LeadForm />
+          <DemoRequestForm />
         </div>
       </SectionWrapper>
     </>

@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
-import { Globe, FileSearch, Mail, Key } from "lucide-react";
+import { Globe, FileSearch, Mail, Key, Shield } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 interface CapabilitySection {
@@ -50,6 +50,16 @@ const capabilities: CapabilitySection[] = [
       "Due-care timeline",
       "Audit-ready reporting",
       "Scope allowlist enforcement",
+    ],
+  },
+  {
+    icon: Shield,
+    title: "Leaked Credentials & Breach Visibility",
+    items: [
+      "Domain-level breach visibility (which domains, which breaches, when)",
+      "Type of data exposed per breach (emails, etc.—no password values)",
+      "Enterprise-trusted (Microsoft, governments, vendors); no legal gray areas",
+      "Dashboards: by domain, exposure timeline, breach severity",
     ],
   },
 ];

@@ -8,7 +8,7 @@ import { Shield, FileText, Zap, CheckCircle2, Lock, Clock } from "lucide-react";
 
 export const metadata = {
   title: "How It Works - Fusionstek",
-  description: "See how Fusionstek builds continuous, audit-ready external security assurance.",
+  description: "See how Fusionstek delivers EASM with continuous, audit-ready external security assurance.",
 };
 
 export default function HowItWorksPage() {
@@ -16,35 +16,85 @@ export default function HowItWorksPage() {
     <>
       <PageHero
         title="How It Works"
-        subtitle="Deterministic discovery, verification, and evidence—built for audit-ready assurance."
+        subtitle="Full EASM—discovery, monitoring, assessment, intelligence, and reporting—with regulator-ready evidence built in."
       />
 
-      {/* 4-Step Process */}
+      {/* What EASM does */}
       <SectionWrapper
-        title="The Process"
-        subtitle="Four steps to external security assurance that stands up to scrutiny"
+        title="What Does EASM Do?"
+        subtitle="External Attack Surface Management gives you continuous visibility and control over everything that is exposed to the internet—so you can find risk, fix it, and prove it."
+      >
+        <div className="max-w-3xl mx-auto mb-12 text-center">
+          <p className="text-[var(--neutral-400)] text-base md:text-lg leading-relaxed">
+            EASM discovers and maps your external assets, monitors them for changes, assesses them for vulnerabilities, enriches with intelligence (including breach exposure), and delivers clear reporting. Fusionstek adds verification and audit-ready evidence at every step—so regulators and insurers get the proof they need.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <FeatureCard
+            iconName="Zap"
+            title="Discovery"
+            description="Identify every internet-facing asset: domains, subdomains, IPs, ports, URLs, APIs, and cloud. One verified map of what attackers can see."
+            index={0}
+          />
+          <FeatureCard
+            iconName="Clock"
+            title="Monitoring"
+            description="Continuous tracking of your attack surface. Drift detection shows what’s new, changed, or gone—so you see risk as it appears."
+            index={1}
+          />
+          <FeatureCard
+            iconName="FileSearch"
+            title="Assessment"
+            description="Scan infrastructure and web apps for vulnerabilities. Findings are prioritised and tied to real, reachable assets—no noise."
+            index={2}
+          />
+          <FeatureCard
+            iconName="Shield"
+            title="Intelligence"
+            description="Breach and credential exposure visibility (e.g. domain-level breach data), threat context, and signals that matter for prioritisation."
+            index={3}
+          />
+          <FeatureCard
+            iconName="FileText"
+            title="Reporting"
+            description="Dashboards, management summaries, and detailed reports. Export what you need for ops, leadership, and audits."
+            index={4}
+          />
+          <FeatureCard
+            iconName="CheckCircle2"
+            title="Regulator Assurance"
+            description="Verification ledger, due-care timeline, and evidence-grade deliverables so compliance and insurers can trust the story."
+            index={5}
+          />
+        </div>
+      </SectionWrapper>
+
+      {/* How our EASM runs: 4 steps */}
+      <SectionWrapper
+        title="How Our EASM Runs"
+        subtitle="Four steps from scope to evidence—deterministic, policy-driven, and audit-ready"
       >
         <StepStrip
           steps={[
             {
               number: 1,
               title: "Define Scope",
-              description: "Provide your domains and approved scope. Policies enforce what we can test and how.",
+              description: "You provide domains and approved scope. Policies enforce what we can test and how—compliance-safe from day one.",
             },
             {
               number: 2,
               title: "Discover & Map",
-              description: "We enumerate internet-facing assets and build a verified surface map.",
+              description: "We run full EASM discovery: enumerate internet-facing assets and build a verified attack surface map.",
             },
             {
               number: 3,
-              title: "Verify & Analyze",
-              description: "Findings are validated with evidence and tied to real, reachable assets.",
+              title: "Monitor, Assess & Enrich",
+              description: "Continuous monitoring and drift detection, vulnerability assessment, and intelligence (e.g. breach visibility) run on your scope.",
             },
             {
               number: 4,
               title: "Deliver Evidence",
-              description: "Audit-ready reports, drift tracking, and defensible timelines are produced automatically.",
+              description: "Audit-ready reports, drift timelines, and defensible evidence are produced automatically for your team and regulators.",
             },
           ]}
         />
@@ -53,7 +103,7 @@ export default function HowItWorksPage() {
       {/* What You Get */}
       <SectionWrapper
         title="What You Get"
-        subtitle="External assurance artifacts that regulators, insurers, and boards can trust"
+        subtitle="EASM outcomes plus evidence that regulators, insurers, and boards can trust"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <FeatureCard
@@ -98,11 +148,15 @@ export default function HowItWorksPage() {
       {/* FAQ */}
       <SectionWrapper
         title="Frequently Asked Questions"
-        subtitle="Common questions about our security assessment process"
+        subtitle="Common questions about EASM and our process"
       >
         <div className="max-w-3xl mx-auto">
           <FAQAccordion
             faqs={[
+              {
+                question: "What is EASM?",
+                answer: "External Attack Surface Management (EASM) is the practice of discovering, monitoring, assessing, and reporting on everything your organisation exposes to the internet—domains, IPs, apps, APIs, cloud—so you can see and reduce external risk. Fusionstek delivers full EASM plus verification and audit-ready evidence for regulators and insurers.",
+              },
               {
                 question: "How long does the baseline assurance take?",
                 answer: "Baseline assurance depends on scope. We deliver demo reports within 24 hours, and daily refresh keeps assurance current afterward.",
@@ -132,10 +186,10 @@ export default function HowItWorksPage() {
       <SectionWrapper>
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="font-sentient text-3xl md:text-4xl font-extralight tracking-tight mb-6">
-            Ready to Get Started?
+            Ready for Full EASM + Regulator Assurance?
           </h2>
           <p className="text-[var(--neutral-400)] text-lg mb-10">
-            Submit your first security assessment request today.
+            Book a demo and see how we run discovery, monitoring, assessment, and intelligence with audit-ready evidence.
           </p>
           <CTAButton href="/demo" variant="primary" size="lg">
             Book a Demo

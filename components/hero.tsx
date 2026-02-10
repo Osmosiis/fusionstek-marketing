@@ -31,10 +31,10 @@ export function Hero() {
               mounted && "animate-[reveal-up_0.8s_cubic-bezier(0.16,1,0.3,1)_0.2s_forwards]"
             )}
           >
-            <Pill className="mb-8">EXTERNAL ASSURANCE</Pill>
+            <Pill className="mb-8">EASM + REGULATOR ASSURANCE</Pill>
           </div>
 
-          {/* Headline */}
+          {/* Headline: one line */}
           <h1
             className={cn(
               "font-sentient text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extralight tracking-tight leading-[0.95]",
@@ -42,14 +42,10 @@ export function Hero() {
               mounted && "animate-[reveal-up_0.8s_cubic-bezier(0.16,1,0.3,1)_0.35s_forwards]"
             )}
           >
-            <span className="block">External</span>
-            <span className="block">
-              <em className="font-light italic text-[var(--neutral-400)]">Security</em>{" "}
-              Assurance
-            </span>
+            External Attack Surface Management
           </h1>
 
-          {/* Subheadline */}
+          {/* Subheadline: attacker view + EASM + assurance */}
           <p
             className={cn(
               "mt-8 md:mt-10 text-base md:text-lg text-[var(--neutral-200)] max-w-2xl mx-auto leading-relaxed",
@@ -58,13 +54,13 @@ export function Hero() {
             )}
           >
             <span className="text-[var(--neutral-100)] font-medium">
-              Prove your external security posture
+              We look at your surface the way attackers do—same logic, mindset, and timing.
             </span>
             <span className="mx-2 inline-flex items-center rounded-full bg-[var(--primary-muted)] px-3 py-1 text-[0.8em] uppercase tracking-widest text-[var(--primary)]">
-              audit-ready
+              EASM
             </span>
             <span className="text-[var(--neutral-300)]">
-              continuously and defensibly.
+              with audit-ready proof and security assurance that stands up to regulators and insurers—continuously and defensibly.
             </span>
           </p>
 

@@ -12,6 +12,7 @@ const footerLinks = {
     { href: "/why-us", label: "Why Us" },
   ],
   company: [
+    { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
     { href: "/demo", label: "Book a Demo" },
   ],
@@ -41,8 +42,8 @@ export function Footer() {
           <div className="md:col-span-5">
             <Logo className="w-[100px] mb-6 opacity-60" />
             <p className="text-[var(--neutral-500)] text-sm leading-relaxed max-w-sm">
-              Attacker-grade external assurance with audit-ready proof. We find
-              what attackers can reach and prove it defensibly over time.
+              Complete EASM with regulator-ready assurance. We find what attackers
+              can reach and prove it defensibly over time.
             </p>
           </div>
 

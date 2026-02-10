@@ -6,15 +6,15 @@ import { CTAButton } from "@/components/marketing/cta-button";
 
 export const metadata = {
   title: "Why Us - Fusionstek",
-  description: "Attacker-grade discovery with audit-ready evidence for external security assurance.",
+  description: "Complete EASM with regulator-ready assurance. Attacker-grade discovery, breach visibility, and audit-ready evidence.",
 };
 
 export default function WhyUsPage() {
   return (
     <>
       <PageHero
-        title="Why Fusionstek for External Assurance"
-        subtitle="Attacker-grade discovery with audit-ready evidence."
+        title="Why Fusionstek: Complete EASM + Regulator Assurance"
+        subtitle="Attacker-grade discovery, breach visibility, and audit-ready evidence—for compliance and EASM buyers."
       />
 
       {/* Differentiators */}
@@ -59,13 +59,19 @@ export default function WhyUsPage() {
             description="Every skip, block, or finding includes a deterministic reason."
             index={5}
           />
+          <IconCard
+            iconName="Shield"
+            title="Leaked Credentials & Breach Visibility"
+            description="We monitor known breach exposures for your domains and identities. Domain-level visibility: which domains, which breaches, when, type of data exposed. Enterprise-trusted (Microsoft, governments, vendors), no password values—perfect for dashboards and audit."
+            index={6}
+          />
         </div>
       </SectionWrapper>
 
       {/* Capabilities Grid */}
       <SectionWrapper
-        title="Assurance Capabilities"
-        subtitle="Discovery, verification, reporting, and compliance—fully integrated."
+        title="EASM & Assurance Capabilities"
+        subtitle="Discovery, monitoring, assessment, intelligence (including breach visibility), reporting, and compliance—fully integrated."
       >
         <CapabilitiesGrid />
       </SectionWrapper>
@@ -74,10 +80,10 @@ export default function WhyUsPage() {
       <SectionWrapper>
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="font-sentient text-3xl md:text-4xl font-extralight tracking-tight mb-6">
-            Ready for Attacker-Grade Assurance?
+            Ready for Complete EASM + Regulator Assurance?
           </h2>
           <p className="text-[var(--neutral-400)] text-lg mb-10">
-            See how we prove external security with audit-ready evidence.
+            See how we deliver EASM with audit-ready evidence for compliance and security teams.
           </p>
           <CTAButton href="/demo" variant="primary" size="lg">
             Book a Demo

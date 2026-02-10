@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Hero } from "@/components/hero";
 import { SectionWrapper } from "@/components/marketing/section-wrapper";
 import { FeatureCard } from "@/components/marketing/feature-card";
@@ -15,6 +16,7 @@ import { cn } from "@/lib/utils";
 
 export default function Home() {
   const { ref: ctaRef, isRevealed: ctaRevealed } = useScrollReveal();
+  const { ref: dashboardRef, isRevealed: dashboardRevealed } = useScrollReveal();
 
   return (
     <>
@@ -24,14 +26,14 @@ export default function Home() {
       {/* Problem Section */}
       <SectionWrapper
         id="problem"
-        title="Regulatory-Defensible External Security"
-        subtitle="Continuous proof that your internet-facing apps are monitored, verified, and audit-ready."
+        title="Why External Assurance Has to Be Defensible"
+        subtitle="Unmonitored or unverified surfaces create blind spots and proof gaps. We deliver continuous, audit-ready evidence so you can show what you found, when, and what you did."
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <FeatureCard
             iconName="AlertTriangle"
             title="External Exposure Blind Spots"
-            description="Unmonitored internet-facing assets create silent risk and unaccounted attack paths."
+            description="Unmonitored internet-facing assets create silent risk and unaccounted attack paths—attackers find them first."
             index={0}
           />
           <FeatureCard
@@ -43,7 +45,7 @@ export default function Home() {
           <FeatureCard
             iconName="Lock"
             title="Assurance Over Time"
-            description="Compliance requires continuous evidence of monitoring, remediation, and drift control—not one-off scans."
+            description="Compliance and security both need continuous evidence of monitoring and drift—not one-off scans."
             index={2}
           />
         </div>
@@ -52,26 +54,26 @@ export default function Home() {
       {/* Value/Difference */}
       <SectionWrapper
         id="value"
-        title="Why Fusionstek for External Assurance"
-        subtitle="Continuous, evidence-grade visibility that stands up to regulators and insurers."
+        title="Complete EASM + Regulator Assurance"
+        subtitle="Attacker-grade discovery and evidence-grade visibility for security teams, compliance, regulators, and insurers."
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <FeatureCard
             iconName="Zap"
-            title="Attacker-Grade Discovery"
-            description="Map every internet-facing asset with real evidence, not assumptions."
+            title="Attacker’s View: Logic, Mindset & Timing"
+            description="We look at your applications and external surface the exact way attackers do—same discovery logic, prioritisation, and timing—so you see what they see, with proof."
             index={0}
           />
           <FeatureCard
             iconName="FileSearch"
             title="Verification-First Findings"
-            description="Only show findings that can be verified and reproduced."
+            description="Only show findings that can be verified and reproduced—so security and compliance can trust the story."
             index={1}
           />
           <FeatureCard
             iconName="Shield"
             title="Audit-Ready Reporting"
-            description="Explainable, deterministic reports built for regulators and insurers."
+            description="Explainable, deterministic reports for security teams, regulators, and insurers."
             index={2}
           />
           <FeatureCard
@@ -79,6 +81,74 @@ export default function Home() {
             title="Continuous Assurance"
             description="Daily refresh + drift detection to prove you stayed secure over time."
             index={3}
+          />
+        </div>
+      </SectionWrapper>
+
+      {/* Dashboard / Platform preview - image on the right */}
+      <SectionWrapper
+        id="platform"
+        title="One View of Your External Attack Surface"
+        subtitle="The Attack Surface dashboard gives you a single, evidence-backed view of what’s exposed—and what changed—so you can act and prove it."
+      >
+        <div ref={dashboardRef} className={cn("opacity-0 translate-y-6", dashboardRevealed && "animate-[reveal-up_0.7s_cubic-bezier(0.16,1,0.3,1)_forwards]")}>
+          {/* Dashboard image full-width for maximum visibility */}
+          <div className="w-full max-w-6xl mx-auto mb-10 lg:mb-14">
+            <div className="relative w-full rounded-xl border border-[var(--border)] overflow-hidden bg-[var(--card-bg)] shadow-xl ring-1 ring-[var(--border)]/50">
+              <Image
+                src="/dashboard.png"
+                alt="Fusionstek Attack Surface dashboard showing scan results, assets, exposure, tech stack, cloud, drift, and metrics"
+                width={1600}
+                height={960}
+                className="w-full h-auto object-contain"
+                sizes="100vw"
+              />
+            </div>
+          </div>
+          {/* Supporting copy below */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start max-w-5xl mx-auto">
+            <div className="md:col-span-7 space-y-4">
+              <p className="text-[var(--neutral-400)] text-base md:text-lg leading-relaxed">
+                Choose a completed scan and see everything we found: domains, subdomains, IPs, open ports, URLs, and API endpoints in one place. Health, coverage, confidence, and scope scores show you how thorough the run was—and drift events show exactly what appeared, changed, or disappeared since the last run.
+              </p>
+              <p className="text-[var(--neutral-400)] text-base md:text-lg leading-relaxed">
+                That’s the same view your security team uses to prioritise risk and the same evidence you can point to for regulators and insurers: attacker-grade discovery, with verification and timelines built in.
+              </p>
+            </div>
+            <ul className="text-sm text-[var(--neutral-400)] space-y-2 font-mono uppercase tracking-wider md:col-span-5">
+              <li>Full asset inventory per scan</li>
+              <li>Health, coverage, confidence, scope</li>
+              <li>Drift detection and change tracking</li>
+              <li>Audit-ready evidence in one dashboard</li>
+            </ul>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* Intelligence: Leaked credentials & breach visibility (HIBP) */}
+      <SectionWrapper
+        id="intelligence"
+        title="Intelligence: Leaked Credentials & Breach Visibility"
+        subtitle="We monitor known breach exposures for your domains and identities. Trusted, enterprise-grade breach data—no legal gray areas, no shady collection methods."
+      >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <FeatureCard
+            iconName="Shield"
+            title="Domain-Level Breach Visibility"
+            description="See which of your domains have exposed credentials, which breaches they came from, when the breach occurred, and the type of data exposed (emails, passwords, etc.)—all from a single, authoritative source."
+            index={0}
+          />
+          <FeatureCard
+            iconName="Lock"
+            title="Trust & Credibility"
+            description="Widely trusted by enterprises—used by Microsoft, governments, and security vendors. No password values are ever exposed; data is sourced through transparent, legally clear methods you can stand behind in audits."
+            index={1}
+          />
+          <FeatureCard
+            iconName="FileSearch"
+            title="Dashboards That Make Sense"
+            description="Leaked credentials by domain, top exposed domains, exposure timeline, and breach severity summary—so you can prioritize and report with confidence."
+            index={2}
           />
         </div>
       </SectionWrapper>
@@ -238,10 +308,10 @@ export default function Home() {
             )}
           >
             <h2 className="font-sentient text-3xl md:text-4xl lg:text-5xl font-extralight tracking-tight mb-6">
-              Ready for Attacker-Grade Assurance?
+              Ready for EASM That Thinks Like an Attacker?
             </h2>
             <p className="text-[var(--neutral-400)] text-base md:text-lg mb-10 leading-relaxed">
-              See how we prove external security with audit-ready evidence.
+              See how we deliver external attack surface management—same logic, mindset, and timing as attackers—with audit-ready evidence for security and compliance.
             </p>
             <CTAButton href="/demo" variant="primary" size="lg">
               Book a Demo

@@ -31,6 +31,10 @@ This is a Next.js marketing website built to capture qualified "Book a Demo" lea
 - `/demo` - Primary conversion page with intake form
 - `/contact` - Contact form (reuses LeadForm component)
 
+### Optional assets
+
+- Place your Attack Surface dashboard screenshot at **`public/dashboard.png`** to show the platform preview on the homepage (section “See Your Attack Surface”).
+
 ## Getting Started
 
 ### Prerequisites
