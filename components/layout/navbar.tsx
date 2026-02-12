@@ -8,9 +8,14 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
 const navLinks = [
+  { href: "/solutions/zero-day-protection", label: "Solutions" },
+  { href: "/compare", label: "Compare" },
   { href: "/how-it-works", label: "How It Works" },
   { href: "/use-cases", label: "Use Cases" },
   { href: "/why-us", label: "Why Us" },
+  { href: "/blog", label: "Blog" },
+  { href: "/resources", label: "Resources" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];

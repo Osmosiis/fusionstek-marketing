@@ -79,7 +79,7 @@ export default function Home() {
           <FeatureCard
             iconName="Users"
             title="Continuous Assurance"
-            description="Daily refresh + drift detection to prove you stayed secure over time."
+            description="Daily refresh, drift detection, and zero-day monitoring to prove you stayed secure over time—with alerts 7 days ahead of CVE publication."
             index={3}
           />
         </div>
@@ -122,6 +122,39 @@ export default function Home() {
               <li>Audit-ready evidence in one dashboard</li>
             </ul>
           </div>
+        </div>
+      </SectionWrapper>
+
+      {/* Zero-Day Protection */}
+      <SectionWrapper
+        id="zero-day"
+        title="Zero-Day Detection: 7 Days Before CVEs"
+        subtitle="Detect threats 3–7 days before CVE publication. Asset-specific correlation, version-aware precision, zero infrastructure overhead—no agents required."
+      >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <FeatureCard
+            iconName="Zap"
+            title="Pre-CVE Visibility"
+            description="We monitor GitHub security releases and Exploit-DB so you’re alerted within 24–48 hours of disclosure—before CVE publication."
+            index={0}
+          />
+          <FeatureCard
+            iconName="FileSearch"
+            title="Asset-Specific Alerts"
+            description="Only technologies we detect on your attack surface trigger alerts. No noise for software you don’t run."
+            index={1}
+          />
+          <FeatureCard
+            iconName="Clock"
+            title="Continuous, No Re-Scans"
+            description="One baseline scan powers monitoring every 10 minutes. Zero agents, zero performance impact."
+            index={2}
+          />
+        </div>
+        <div className="text-center">
+          <CTAButton href="/solutions/zero-day-protection" variant="secondary" showArrow>
+            Zero-Day Protection
+          </CTAButton>
         </div>
       </SectionWrapper>
 

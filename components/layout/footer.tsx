@@ -10,11 +10,16 @@ const footerLinks = {
     { href: "/how-it-works", label: "How It Works" },
     { href: "/use-cases", label: "Use Cases" },
     { href: "/why-us", label: "Why Us" },
+    { href: "/solutions/zero-day-protection", label: "Zero-Day Protection" },
+    { href: "/compare", label: "Compare" },
+    { href: "/pricing", label: "Pricing" },
   ],
   company: [
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
     { href: "/demo", label: "Book a Demo" },
+    { href: "/blog", label: "Blog" },
+    { href: "/resources", label: "Resources" },
   ],
 };
 

@@ -12,9 +12,14 @@ interface MobileMenuProps {
 }
 
 const menuItems = [
+  { name: "Solutions", href: "/solutions/zero-day-protection" },
+  { name: "Compare", href: "/compare" },
   { name: "How It Works", href: "/how-it-works" },
   { name: "Use Cases", href: "/use-cases" },
   { name: "Why Us", href: "/why-us" },
+  { name: "Blog", href: "/blog" },
+  { name: "Pricing", href: "/pricing" },
+  { name: "Resources", href: "/resources" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ];

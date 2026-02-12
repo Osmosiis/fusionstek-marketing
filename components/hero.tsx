@@ -60,7 +60,7 @@ export function Hero() {
               EASM
             </span>
             <span className="text-[var(--neutral-300)]">
-              with audit-ready proof and security assurance that stands up to regulators and insurers—continuously and defensibly.
+              with audit-ready proof and security assurance that stands up to regulators and insurers—continuously and defensibly. Including zero-day detection that runs 7 days ahead of CVEs.
             </span>
           </p>
 
