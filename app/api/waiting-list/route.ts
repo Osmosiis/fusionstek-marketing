@@ -47,6 +47,20 @@ function escapeHtml(s: string): string {
     .replace(/'/g, "&#39;");
 }
 
+/** Common personal/free email domains – we ask for work email only. */
+const PERSONAL_EMAIL_DOMAINS = new Set([
+  "gmail.com", "googlemail.com", "yahoo.com", "yahoo.co.uk", "ymail.com",
+  "outlook.com", "hotmail.com", "hotmail.co.uk", "live.com", "msn.com", "outlook.co.uk",
+  "icloud.com", "me.com", "mac.com",
+  "aol.com", "protonmail.com", "proton.me", "zoho.com", "mail.com",
+  "yandex.com", "gmx.com", "gmx.net", "tutanota.com", "fastmail.com",
+]);
+
+function isPersonalEmail(email: string): boolean {
+  const domain = email.trim().toLowerCase().split("@")[1] ?? "";
+  return PERSONAL_EMAIL_DOMAINS.has(domain);
+}
+
 export async function POST(request: NextRequest) {
   const body = await request.json().catch(() => ({}));
   const { name, email, company, companySize } = body;
@@ -56,6 +70,12 @@ export async function POST(request: NextRequest) {
   }
   if (!email || typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ message: "Valid email is required" }, { status: 400 });
+  }
+  if (isPersonalEmail(email)) {
+    return NextResponse.json(
+      { message: "Please use your work or company email address." },
+      { status: 400 }
+    );
   }
   if (!company || typeof company !== "string" || company.trim().length < 2) {
     return NextResponse.json({ message: "Company is required" }, { status: 400 });
@@ -100,8 +120,11 @@ export async function POST(request: NextRequest) {
     if (userResult.error) {
       console.error("Resend user email error:", userResult.error);
       return NextResponse.json(
-        { message: "Failed to send confirmation email. Please try again." },
-        { status: 500 }
+        {
+          message:
+            "We've saved your details. Our confirmation emails work best with a company or work email — try again with that, or we'll contact you at this address when we're ready.",
+        },
+        { status: 200 }
       );
     }
     if (adminResult.error) {

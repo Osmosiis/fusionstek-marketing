@@ -37,9 +37,13 @@ type DemoRequestFormData = z.infer<typeof demoRequestSchema>;
 
 type SubmissionStatus = "idle" | "submitting" | "success" | "error";
 
+const DEFAULT_SUCCESS_MESSAGE =
+  "Thank you for joining the waiting list. Check your email for a confirmation—we'll contact you as soon as we go live.";
+
 export function DemoRequestForm() {
   const [status, setStatus] = useState<SubmissionStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string>(DEFAULT_SUCCESS_MESSAGE);
 
   const form = useForm<DemoRequestFormData>({
     resolver: zodResolver(demoRequestSchema),
@@ -73,6 +77,7 @@ export function DemoRequestForm() {
         throw new Error(body.message || "Submission failed");
       }
 
+      setSuccessMessage(body.message || DEFAULT_SUCCESS_MESSAGE);
       setStatus("success");
       form.reset();
     } catch (error: unknown) {
@@ -92,7 +97,8 @@ export function DemoRequestForm() {
             You're on the list
           </h3>
           <p className="text-[var(--neutral-400)] mb-8">
-            Thank you for joining the waiting list. Check your email for a confirmation—we'll contact you as soon as we go live.</p>
+            {successMessage}
+          </p>
           <button
             type="button"
             onClick={() => setStatus("idle")}
