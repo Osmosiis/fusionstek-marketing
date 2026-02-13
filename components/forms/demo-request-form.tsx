@@ -5,18 +5,31 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
 import { Alert, AlertDescription } from "../ui/alert";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+const COMPANY_SIZES = [
+  { value: "1-10", label: "1–10" },
+  { value: "11-50", label: "11–50" },
+  { value: "51-200", label: "51–200" },
+  { value: "201-500", label: "201–500" },
+  { value: "500+", label: "500+" },
+] as const;
 
 const demoRequestSchema = z.object({
   name: z.string().min(2, "Name is required"),
   email: z.string().email("Valid email is required"),
   company: z.string().min(2, "Company is required"),
-  title: z.string().min(2, "Title is required"),
-  notes: z.string().max(2000).optional(),
+  companySize: z.string().min(1, "Company size is required"),
   honeypot: z.string().max(0, "Invalid submission"),
 });
 
@@ -34,8 +47,7 @@ export function DemoRequestForm() {
       name: "",
       email: "",
       company: "",
-      title: "",
-      notes: "",
+      companySize: "",
       honeypot: "",
     },
   });
@@ -45,24 +57,19 @@ export function DemoRequestForm() {
     setErrorMessage(null);
 
     try {
-      const message = [
-        `Role: ${data.title}`,
-        data.notes?.trim() ? data.notes.trim() : "Requested a demo.",
-      ].join("\n\n");
-
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/api/waiting-list", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: data.name,
           email: data.email,
           company: data.company,
-          message,
+          companySize: data.companySize,
         }),
       });
 
+      const body = await res.json().catch(() => ({}));
       if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
         throw new Error(body.message || "Submission failed");
       }
 
@@ -82,11 +89,10 @@ export function DemoRequestForm() {
             <CheckCircle2 className="w-10 h-10 text-[var(--primary)]" strokeWidth={1.5} />
           </div>
           <h3 className="font-sentient text-2xl md:text-3xl font-extralight mb-4">
-            Request Received
+            You're on the list
           </h3>
           <p className="text-[var(--neutral-400)] mb-8">
-            Thanks for your interest. We’ll be in touch shortly to schedule a time that works for you.
-          </p>
+            Thank you for joining the waiting list. Check your email for a confirmation—we'll contact you as soon as we go live.</p>
           <button
             type="button"
             onClick={() => setStatus("idle")}
@@ -99,7 +105,7 @@ export function DemoRequestForm() {
               "hover:border-[var(--primary)] hover:text-[var(--primary)]"
             )}
           >
-            Submit Another Request
+            Add another
           </button>
         </div>
       </div>
@@ -159,27 +165,26 @@ export function DemoRequestForm() {
         </div>
 
         <div>
-          <Label htmlFor="demo-title">Job title *</Label>
-          <Input
-            id="demo-title"
-            {...form.register("title")}
-            placeholder="e.g. CISO, Security Lead"
+          <Label htmlFor="demo-company-size">Company size *</Label>
+          <Select
+            onValueChange={(v) => form.setValue("companySize", v, { shouldValidate: true })}
+            value={form.watch("companySize")}
             disabled={status !== "idle"}
-          />
-          {form.formState.errors.title && (
-            <p className="text-sm text-destructive mt-1">{form.formState.errors.title.message}</p>
+          >
+            <SelectTrigger id="demo-company-size" className="w-full">
+              <SelectValue placeholder="Select size" />
+            </SelectTrigger>
+            <SelectContent>
+              {COMPANY_SIZES.map(({ value, label }) => (
+                <SelectItem key={value} value={value}>
+                  {label} employees
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          {form.formState.errors.companySize && (
+            <p className="text-sm text-destructive mt-1">{form.formState.errors.companySize.message}</p>
           )}
-        </div>
-
-        <div>
-          <Label htmlFor="demo-notes">Notes <span className="text-foreground/40 text-xs">(optional)</span></Label>
-          <Textarea
-            id="demo-notes"
-            {...form.register("notes")}
-            rows={3}
-            placeholder="What would you like to see in the demo? Any preferred times or timezone?"
-            disabled={status !== "idle"}
-          />
         </div>
 
         {status === "error" && (
@@ -204,7 +209,7 @@ export function DemoRequestForm() {
             "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
           )}
         >
-          {status === "idle" && "Request a Demo"}
+          {status === "idle" && "Join the waiting list"}
           {status === "submitting" && (
             <>
               <Loader2 className="w-4 h-4 animate-spin" />

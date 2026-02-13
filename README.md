@@ -4,7 +4,7 @@ Marketing website for Fusionstek, an advanced cybersecurity web application prov
 
 ## Overview
 
-This is a Next.js marketing website built to capture qualified "Book a Demo" leads via the `/demo` intake request form. The site integrates with an Intake Gateway API for processing security assessment requests.
+This is a Next.js marketing website. The `/demo` page is a **waiting list** sign-up (name, email, company, company size). On submit, the user receives a thank-you email and the admin receives a notification at info@fusionstek.com. Email is sent via [Resend](https://resend.com); set `RESEND_API_KEY` in Vercel (see `.env.example`).
 
 ## Tech Stack
 
@@ -28,7 +28,7 @@ This is a Next.js marketing website built to capture qualified "Book a Demo" lea
 - `/how-it-works` - Detailed process explanation and FAQ
 - `/use-cases` - Industry-specific use cases
 - `/why-us` - Differentiators and comparison
-- `/demo` - Primary conversion page with intake form
+- `/demo` - Join the waiting list (sends confirmation email to user and notification to info@fusionstek.com)
 - `/contact` - Contact form (reuses LeadForm component)
 
 ### Optional assets

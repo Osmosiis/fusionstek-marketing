@@ -3,22 +3,22 @@ import { SectionWrapper } from "@/components/marketing/section-wrapper";
 import { DemoRequestForm } from "@/components/forms/demo-request-form";
 
 export const metadata = {
-  title: "Book a Demo - Fusionstek",
-  description: "Schedule a demo of Fusionstek EASM and regulator assurance. We'll reach out to find a time that works.",
+  title: "Join the Waiting List - Fusionstek",
+  description: "Join the Fusionstek waiting list. We'll contact you as soon as we go live.",
 };
 
 export default function DemoPage() {
   return (
     <>
       <PageHero
-        title="Book a Demo"
-        subtitle="See how EASM and regulator assurance work in practice. We'll reach out to schedule a call."
+        title="Join the Waiting List"
+        subtitle="Be the first to know when we go live. We'll contact you as soon as Fusionstek is ready."
       />
 
       <SectionWrapper>
         <div className="max-w-2xl mx-auto">
           <p className="text-center text-[var(--neutral-500)] text-sm mb-8">
-            Share your details and we'll get in touch to set up a time that works for you.
+            Enter your details below and we'll add you to the list. You'll receive a confirmation email and we'll reach out when we launch.
           </p>
           <DemoRequestForm />
         </div>

@@ -11,17 +11,32 @@ interface MobileMenuProps {
   className?: string;
 }
 
-const menuItems = [
-  { name: "Solutions", href: "/solutions/zero-day-protection" },
-  { name: "Compare", href: "/compare" },
-  { name: "How It Works", href: "/how-it-works" },
-  { name: "Use Cases", href: "/use-cases" },
-  { name: "Why Us", href: "/why-us" },
-  { name: "Blog", href: "/blog" },
-  { name: "Pricing", href: "/pricing" },
-  { name: "Resources", href: "/resources" },
-  { name: "About", href: "/about" },
-  { name: "Contact", href: "/contact" },
+const menuGroups = [
+  {
+    label: "Product",
+    links: [
+      { name: "Solutions", href: "/solutions/zero-day-protection" },
+      { name: "Compare", href: "/compare" },
+      { name: "How It Works", href: "/how-it-works" },
+      { name: "Use Cases", href: "/use-cases" },
+      { name: "Why Us", href: "/why-us" },
+    ],
+  },
+  {
+    label: "Resources",
+    links: [
+      { name: "Blog", href: "/blog" },
+      { name: "Resources", href: "/resources" },
+    ],
+  },
+  {
+    label: "Company",
+    links: [
+      { name: "About", href: "/about" },
+      { name: "Pricing", href: "/pricing" },
+      { name: "Contact", href: "/contact" },
+    ],
+  },
 ];
 
 export const MobileMenu = ({ className }: MobileMenuProps) => {
@@ -77,34 +92,50 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
             </button>
           </Dialog.Close>
 
-          <nav className="container flex flex-col items-center justify-center">
-            {menuItems.map((item, index) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={handleLinkClick}
-                className={cn(
-                  "py-4 text-2xl md:text-3xl font-sentient font-extralight tracking-tight",
-                  "text-[var(--neutral-400)] hover:text-[var(--foreground)]",
-                  "transition-all duration-300",
-                  "opacity-0 translate-y-4",
-                  isOpen && "animate-[reveal-up_0.5s_cubic-bezier(0.16,1,0.3,1)_forwards]"
-                )}
-                style={{
-                  animationDelay: isOpen ? `${index * 75}ms` : "0ms"
-                }}
-              >
-                {item.name}
-              </Link>
+          <nav className="container flex flex-col items-center justify-center gap-6">
+            {menuGroups.map((group, groupIndex) => (
+              <div key={group.label} className="flex flex-col items-center">
+                <span
+                  className={cn(
+                    "text-xs uppercase tracking-wider text-[var(--neutral-500)] mb-2",
+                    "opacity-0 translate-y-4",
+                    isOpen && "animate-[reveal-up_0.5s_cubic-bezier(0.16,1,0.3,1)_forwards]"
+                  )}
+                  style={{
+                    animationDelay: isOpen ? `${groupIndex * 120}ms` : "0ms"
+                  }}
+                >
+                  {group.label}
+                </span>
+                {group.links.map((item, linkIndex) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={handleLinkClick}
+                    className={cn(
+                      "py-3 text-xl md:text-2xl font-sentient font-extralight tracking-tight",
+                      "text-[var(--neutral-400)] hover:text-[var(--foreground)]",
+                      "transition-all duration-300",
+                      "opacity-0 translate-y-4",
+                      isOpen && "animate-[reveal-up_0.5s_cubic-bezier(0.16,1,0.3,1)_forwards]"
+                    )}
+                    style={{
+                      animationDelay: isOpen ? `${groupIndex * 120 + (linkIndex + 1) * 60}ms` : "0ms"
+                    }}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
             ))}
 
             <div 
               className={cn(
-                "mt-8 opacity-0 translate-y-4",
+                "mt-4 opacity-0 translate-y-4",
                 isOpen && "animate-[reveal-up_0.5s_cubic-bezier(0.16,1,0.3,1)_forwards]"
               )}
               style={{
-                animationDelay: isOpen ? `${menuItems.length * 75}ms` : "0ms"
+                animationDelay: isOpen ? `${menuGroups.length * 120 + 200}ms` : "0ms"
               }}
             >
               <CTAButton
