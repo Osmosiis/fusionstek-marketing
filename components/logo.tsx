@@ -9,7 +9,6 @@ interface LogoProps {
 }
 
 export const Logo = ({ className }: LogoProps) => {
-  const [imgSrc, setImgSrc] = useState("/fusion.png");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -27,16 +26,12 @@ export const Logo = ({ className }: LogoProps) => {
 
   return (
     <Image
-      src={imgSrc}
+      src="/fusion.jpg"
       alt="Fusionstek Logo"
       width={120}
       height={40}
       className={cn("object-contain", className)}
       priority
-      onError={() => {
-        // Fallback to fusion.jpg if fusion.png doesn't exist
-        setImgSrc("/fusion.jpg");
-      }}
       suppressHydrationWarning
     />
   );
