@@ -49,6 +49,9 @@ export default function Home() {
             index={2}
           />
         </div>
+        <p className="mt-8 text-center text-[var(--neutral-400)] text-sm md:text-base max-w-3xl mx-auto">
+          Discovery is easy; validation is the bottleneck. Many tools dump raw scanner output—but in real environments a large share of findings aren’t exploitable in context (auth, WAF, dead assets). We verify first, then escalate: a short, evidence-backed list instead of noise.
+        </p>
       </SectionWrapper>
 
       {/* Value/Difference */}
@@ -67,7 +70,7 @@ export default function Home() {
           <FeatureCard
             iconName="FileSearch"
             title="Verification-First Findings"
-            description="Only show findings that can be verified and reproduced—so security and compliance can trust the story."
+            description="We only escalate what we can prove is exploitable—with proof artifacts and attack-path context. Less triage, faster remediation, stronger credibility with regulators and insurers."
             index={1}
           />
           <FeatureCard

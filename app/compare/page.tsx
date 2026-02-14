@@ -55,6 +55,27 @@ const comparisonRows = [
   },
 ];
 
+const easmValidationRows = [
+  {
+    metric: "Findings delivered",
+    traditional: "Raw scanner output; large volume",
+    fusionstek: "Validated, evidence-backed list",
+    improvement: "Less triage, defensible",
+  },
+  {
+    metric: "Proof artifacts",
+    traditional: "Often none or minimal",
+    fusionstek: "Screenshots, logs, HAR, repro steps",
+    improvement: "Audit-ready evidence",
+  },
+  {
+    metric: "Exploitability",
+    traditional: "Claimed by scanner only",
+    fusionstek: "Verified in context (reachability, auth, WAF)",
+    improvement: "Trust with regulators",
+  },
+];
+
 export default function ComparePage() {
   return (
     <>
@@ -117,6 +138,53 @@ export default function ComparePage() {
             Book a Demo
           </CTAButton>
         </div>
+      </SectionWrapper>
+
+      <SectionWrapper
+        title="EASM Findings: Validated vs Raw Output"
+        subtitle="We verify what’s exploitable before we escalate—so you get a short, evidence-backed list, not thousands of raw alerts."
+      >
+        <CompareTable>
+          <table className="w-full min-w-[640px] text-left">
+            <thead>
+              <tr className="border-b border-[var(--border)]">
+                <th className="px-6 py-4 text-xs font-mono uppercase tracking-wider text-[var(--neutral-400)]">
+                  Aspect
+                </th>
+                <th className="px-6 py-4 text-xs font-mono uppercase tracking-wider text-[var(--neutral-400)]">
+                  Raw / unvalidated
+                </th>
+                <th className="px-6 py-4 text-xs font-mono uppercase tracking-wider text-[var(--primary)]">
+                  Fusionstek
+                </th>
+                <th className="px-6 py-4 text-xs font-mono uppercase tracking-wider text-[var(--neutral-400)]">
+                  Outcome
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {easmValidationRows.map((row) => (
+                <tr
+                  key={row.metric}
+                  className="border-b border-[var(--border)] last:border-b-0 hover:bg-[var(--card-bg-hover)]/50 transition-colors"
+                >
+                  <td className="px-6 py-4 text-sm font-medium text-[var(--foreground)]">
+                    {row.metric}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-[var(--neutral-400)]">
+                    {row.traditional}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-[var(--foreground)]">
+                    {row.fusionstek}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-[var(--primary)]">
+                    {row.improvement}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </CompareTable>
       </SectionWrapper>
 
       <SectionWrapper

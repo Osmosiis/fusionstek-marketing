@@ -44,8 +44,8 @@ export default function HowItWorksPage() {
           />
           <FeatureCard
             iconName="FileSearch"
-            title="Assessment"
-            description="Scan infrastructure and web apps for vulnerabilities. Findings are prioritised and tied to real, reachable assets—no noise."
+            title="Assessment & Validation"
+            description="Scan for vulnerabilities, then validate before escalation: reachability, context, and control behaviour are checked. Only evidence-backed, exploitable findings are promoted to reports and tickets—no raw scanner dump."
             index={2}
           />
           <FeatureCard
@@ -88,8 +88,8 @@ export default function HowItWorksPage() {
             },
             {
               number: 3,
-              title: "Monitor, Assess & Enrich",
-              description: "Continuous monitoring and drift detection, vulnerability assessment, and intelligence (e.g. breach visibility) run on your scope.",
+              title: "Monitor, Assess & Validate",
+              description: "Monitoring, drift detection, and vulnerability assessment run on your scope. Findings are validated (evidence, exploitability) before they’re promoted—so reports contain only what we can prove.",
             },
             {
               number: 4,
@@ -115,7 +115,7 @@ export default function HowItWorksPage() {
           <FeatureCard
             iconName="FileText"
             title="Evidence-Grade Findings"
-            description="Only findings that can be verified and reproduced make it into reports."
+            description="Findings are validated (evidence, exploitability) before escalation. Only what we can verify and reproduce makes it into reports—proof artifacts, attack paths, and safe reproduction steps included."
             index={1}
           />
           <FeatureCard

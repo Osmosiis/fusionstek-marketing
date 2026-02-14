@@ -17,6 +17,18 @@ export default function WhyUsPage() {
         subtitle="Attacker-grade discovery, breach visibility, and audit-ready evidence—for compliance and EASM buyers."
       />
 
+      {/* Why verify first */}
+      <SectionWrapper
+        title="Why Verify First?"
+        subtitle="Validation is the bottleneck—not discovery. We’re built to fix that."
+      >
+        <div className="max-w-3xl mx-auto text-center mb-0">
+          <p className="text-[var(--neutral-400)] text-base md:text-lg leading-relaxed">
+            Scanning and discovery are easy; the hard part is validating what’s really exploitable in context (auth, segmentation, WAF, dead assets). In real environments a large share of raw findings aren’t exploitable—so teams drown in noise. We verify before we escalate: only evidence-backed, exploitable outcomes become reportable findings and tickets. That’s how you get less triage, faster remediation, and credibility that regulators and insurers trust.
+          </p>
+        </div>
+      </SectionWrapper>
+
       {/* Differentiators */}
       <SectionWrapper
         title="What Sets Us Apart"

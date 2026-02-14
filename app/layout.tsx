@@ -11,7 +11,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Fusionstek - External Attack Surface Management & Security Assurance",
-  description: "EASM that looks at your surface the way attackers do—same logic, mindset, and timing. Complete external attack surface management with audit-ready evidence for security teams, compliance, and insurers.",
+  description: "EASM that looks at your surface the way attackers do—same logic, mindset, and timing. We verify what’s exploitable before we escalate: a short, evidence-backed list, not raw alerts. Complete external attack surface management with audit-ready evidence for security teams, compliance, and insurers.",
   generator: "Next.js",
   icons: {
     icon: "/fusion%20logo.jpg",
